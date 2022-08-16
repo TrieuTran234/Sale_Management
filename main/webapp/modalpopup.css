@@ -1,0 +1,131 @@
+@charset "ISO-8859-1";
+ .u-section-5 {
+  min-height: 826px;
+}
+
+.u-section-5 .u-image-1 {
+  width: 636px;
+  min-height: 612px;
+  box-shadow: 9px 9px 4px 0 rgba(0,0,0,0.2);
+  background-image: url("images/fdfddf.jpg");
+  background-position: 50% 50%;
+  margin: 113px auto 60px calc(((100% - 1140px) / 2) + 217px);
+}
+
+.u-section-5 .u-container-layout-1 {
+  padding: 39px 41px 40px;
+}
+
+.u-section-5 .u-text-1 {
+  text-transform: uppercase;
+  font-size: 3.75rem;
+  font-weight: 700;
+  font-family: Oswald, sans-serif;
+  margin: 9px 9px 0;
+}
+
+.u-section-5 .u-form-1 {
+  height: 161px;
+  margin: 32px 9px 0;
+}
+
+.u-section-5 .u-input-1 {
+  background-image: none;
+  font-size: 1.25rem;
+}
+
+.u-section-5 .u-btn-1 {
+  border-style: solid;
+  background-image: none;
+  font-size: 1.25rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 400;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.u-section-5 .u-icon-1 {
+  height: 100px;
+  width: 133px;
+  color: rgb(235, 186, 22) !important;
+  margin: 20px auto 0;
+}
+
+.u-section-5 .u-icon-2 {
+  width: 27px;
+  height: 27px;
+  left: auto;
+  top: 17px;
+  position: absolute;
+  right: 16px;
+}
+
+@media (max-width: 1199px) {
+  .u-section-5 .u-image-1 {
+    height: auto;
+    margin-left: calc(((100% - 940px) / 2) + 217px);
+  }
+
+  .u-section-5 .u-form-1 {
+    margin-right: initial;
+    margin-left: initial;
+  }
+}
+
+@media (max-width: 991px) {
+  .u-section-5 .u-image-1 {
+    margin-left: calc(((100% - 720px) / 2) + 84px);
+  }
+
+  .u-section-5 .u-container-layout-1 {
+    padding: 30px 50px;
+  }
+}
+
+@media (max-width: 767px) {
+  .u-section-5 .u-image-1 {
+    width: 540px;
+    min-height: 615px;
+    margin-left: auto;
+  }
+
+  .u-section-5 .u-container-layout-1 {
+    padding-top: 45px;
+    padding-left: 45px;
+    padding-right: 45px;
+  }
+
+  .u-section-5 .u-text-1 {
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .u-section-5 .u-icon-1 {
+    margin-top: 11px;
+  }
+}
+
+@media (max-width: 575px) {
+  .u-section-5 .u-image-1 {
+    width: 340px;
+    min-height: 600px;
+  }
+
+  .u-section-5 .u-container-layout-1 {
+    padding: 50px 25px 26px;
+  }
+
+  .u-section-5 .u-text-1 {
+    font-size: 2.25rem;
+  }
+
+  .u-section-5 .u-btn-1 {
+    width: 100%;
+  }
+
+  .u-section-5 .u-icon-1 {
+    margin-top: 0;
+  }
+}
