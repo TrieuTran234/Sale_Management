@@ -29,7 +29,7 @@ import com.service.SessionService;
 import com.service.StaffService;
 
 
-@Controller
+//@Controller
 public class AdminProductController {
 	@Autowired
 	ProductService productService;

@@ -49,67 +49,62 @@ public class AccountController {
 	FindUserService findUserService;
 	@Autowired
 	MailerService mailerService;
+	
 	@GetMapping("/account/login")
-	public String login1(Model model) {
+	public String get_login(Model model) {
 		model.addAttribute("user1", cookie.getValue("user1"));	
 		loadNameAcount(model);
 		return "/account/login";
 	}
 
 	@PostMapping("/account/login")
-	public String login2(Model model) {
+	public String post_login(Model model) {
 		// co the dung = request.getParameter("value");
 		String un = param.getString("username", "");
 		String pw = param.getString("password", "");
-		boolean rm = param.getBoolean("remember", false);// chuc mang remember me
-
+		// chuc mang remember me
+		boolean rm = param.getBoolean("remember", false);
+		//thong bao khi loi
 		String message = "";
-
-		Customer customer3 = null;
+		//check xem ten dg la nguoi dung hay nhan vien
+		Customer customer3= null;
 		Staff staff3 = null;
 		Optional<Customer> customerOP = customerService.findById(un);
 		Optional<Staff> staffOP = staffService.findById(un);
-
+	
 		// xu ly khi la khach hang
 		if (customerOP.isPresent()) {
 			customer3 = customerOP.get();
 			if (customer3.getActive() == false) {
-				message = "Your account is not active";
+				message = "Tài khoản chưa được kịch hoạt.";
 				model.addAttribute("message", message);
 			} else if (!dologin(un, pw)) {
-				message = "Invalid password customer";
+				message = "Sai mật khẩu.";
 				model.addAttribute("user1",un);
-				model.addAttribute("message", message + " mk la:" + customer3.getPassword());
+				model.addAttribute("message", message + " mk là:" + customer3.getPassword());
 			} else {
-				/// truong hop dang nhap thanh cong
 				session.set("user", un);
 				session.set("admin", null);
-				// can hoi phuc, check lai security-uri
-				// ===========================================================================
-//				String uri = session.get("security-uri");
-//				if (uri != null) {
-//					message = "security-uri false";
-//					model.addAttribute("message", message);
-//				}
 			}
 		}
 		// xy ly khi la nhan vien
 		if (staffOP.isPresent()) {
 			staff3 = staffOP.get();
 			if (!dologin(un, pw)) {
-				message = "Invalid password staff";
+				message = "Sai mật khẩu.";
 				model.addAttribute("user1",un);
-				model.addAttribute("message", message + " mk la:" + staff3.getPassword());
+				model.addAttribute("message", message + " mk là:" + staff3.getPassword());
 			} else {
 				session.set("user", un);
 				session.set("admin", "is Admin");
-				// can hoi phuc, check lai security-uri
-				// ===========================================================================
-//				String uri = session.get("security-uri");
-//				if (uri == null) {
-//					message = "security-uri false";
-//					model.addAttribute("message", message);
-//				}
+				 /*can hoi phuc, check lai security-uri
+				 ===========================================================================
+				String uri = session.get("security-uri");
+				if (uri == null) {
+					message = "security-uri false";
+					model.addAttribute("message", message);
+				}
+				*/
 
 			}
 		}
@@ -120,7 +115,6 @@ public class AccountController {
 		} else {
 			cookie.remove("user1");
 		}
-		String name = findUserService.findUser(session.get("user"));// ???????????????????????????????????????????????
 		
 		if (message.equals("")) {
 			return "redirect:/index";

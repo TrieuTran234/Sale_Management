@@ -29,7 +29,7 @@ import com.service.StaffService;
 
 
 
-@Controller
+//@Controller
 public class ClientProductController {
 	@Autowired
 	CookieService cookie;

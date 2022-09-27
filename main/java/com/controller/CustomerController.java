@@ -18,7 +18,7 @@ import com.service.ParamService;
 import com.service.SessionService;
 
 
-@Controller
+//@Controller
 public class CustomerController {
 	@Autowired
 	CustomerService customerService;

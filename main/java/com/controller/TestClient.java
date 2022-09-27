@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 public class TestClient {
 
-	@RequestMapping("/index")
+	@RequestMapping("/index/fuc")
 	public String index() {
 		return "/client/index";
 	}

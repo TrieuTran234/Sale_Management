@@ -25,7 +25,7 @@ import com.service.StaffService;
 
 
 
-@Controller
+//@Controller
 public class StaffController {
 	@Autowired
 	StaffService staffService;
