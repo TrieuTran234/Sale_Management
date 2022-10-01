@@ -6,9 +6,6 @@
 		<div class="container" style="max-height: 30px;">
 			<div class="row">
 				<div class="col-lg-6 col-md-5">
-					<div class="header__top__left">
-						<p>Free shipping, 30-day return or refund guarantee.</p>
-					</div>
 				</div>
 
 				<div class="col-lg-6 col-md-5">
@@ -74,18 +71,16 @@
 			<div class="col-lg-6 col-md-6">
 				<nav class="header__menu mobile-menu">
 					<ul>
-						<li class="active"><a href="/index">Home</a></li>
-						<li><a href="/client/product">Shop</a></li>
+						<li class="active"><a href="/index">Trang Chủ</a></li>
+						<li><a href="/client/product">Sản Phẩm</a></li>
 						<li><a href="/about">Pages</a>
 							<ul class="dropdown">
 								<li><a href="/about">About Us</a></li>
-
 								<li><a href="/client/shoppingcart/index">Shopping Cart</a></li>
-								<li><a href="./checkout.html">Check Out</a></li>
 								<li><a href="/blog-details">Blog Details</a></li>
 							</ul></li>
-						<li><a href="/blog">Blog</a></li>
-						<li><a href="/contact">Contacts</a></li>
+						<li><a href="/blog">Bài Viết</a></li>
+						<li><a href="/contact">Liên Hệ</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -96,7 +91,7 @@
 						src="/client/img/icon/heart.png" alt=""></a> <a
 						href="/client/shoppingcart/index"><img
 						src="/client/img/icon/cart.png" alt=""> <span>${count }</span></a>
-					<div class="price">$0.00</div>
+					<div class="price">$VND</div>
 				</div>
 			</div>
 		</div>

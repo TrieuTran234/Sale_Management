@@ -49,52 +49,6 @@
 	</div>
 
 
-
-	<!-- Hero Section Begin -->
-	<section class="hero">
-		<div class="hero__slider owl-carousel">
-			<div class="hero__items set-bg"
-				data-setbg="/client/img/hero/hero-1.jpg">
-				<div class="container">
-					<div class="row">
-						<div class="col-xl-5 col-lg-7 col-md-8">
-							<div class="hero__text">
-								<h6>Summer Collection</h6>
-								<h2>🚨SUPER SUMMER SALE 🚨</h2>
-								<p>We’re bringing the heat with our Super Summer Sale! 🔥
-
-									Take 30% off ALL merch and apparel automatically when you add
-									to cart. Don’t miss out on these hot deals now through Monday,
-									May 30th. 😎⚡️</p>
-								<a href="#" class="primary-btn">Shop now </a>
-
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="hero__items set-bg"
-				data-setbg="/client/img/hero/nhatam2.jpg">
-				<div class="container">
-					<div class="row">
-						<div class="col-xl-5 col-lg-7 col-md-8">
-							<div class="hero__text">
-								<h6>Summer Collection</h6>
-								<h2>🚨SUPER SUMMER SALE 🚨</h2>
-								<p>Summer’s right around the corner! Feel the ocean breeze
-									in your hair, rock those weird tan lines, and cruise the beach
-									on your SUPER73. 😎⚡️</p>
-								<a href="#" class="primary-btn">Shop now </a>
-
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Hero Section End -->
-
 	<!-- Banner Section Begin -->
 	<section class="banner spad">
 		<div class="container">
@@ -105,8 +59,8 @@
 							<img src="/client/img/banner/banner-1.jpg" alt="">
 						</div>
 						<div class="banner__item__text">
-							<h2>R-SERIES</h2>
-							<a href="/client/product/findbycate/RS">Shop now</a>
+							<h2>Côn tay</h2>
+							<a href="/client/product/findbycate/RS">Mua ngay</a>
 						</div>
 					</div>
 				</div>
@@ -116,8 +70,8 @@
 							<img src="/client/img/banner/banner-2.jpg" alt="">
 						</div>
 						<div class="banner__item__text">
-							<h2>S-SERIES</h2>
-							<a href="/client/product/findbycate/SS">Shop now</a>
+							<h2>Hiệu năng cao</h2>
+							<a href="/client/product/findbycate/SS">Mua ngay</a>
 						</div>
 					</div>
 				</div>
@@ -127,8 +81,8 @@
 							<img src="/client/img/banner/banner-3.jpg" alt="">
 						</div>
 						<div class="banner__item__text">
-							<h2>Z-SERIES</h2>
-							<a href="/client/product/findbycate/ZS">Shop now</a>
+							<h2>Phổ thông</h2>
+							<a href="/client/product/findbycate/ZS">Mua ngay</a>
 						</div>
 					</div>
 				</div>
@@ -214,13 +168,13 @@
 							<div class="product__item__text">
 								<h6>${item.name }</h6>
 								<a href="/client/shoppingcart/add/${item.id}" class="add-cart">+
-									Add To Cart</a>
+									Thêm giỏ hàng.</a>
 								<div class="rating">
 									<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
 										class="fa fa-star"></i> <i class="fa fa-star"></i> <i
 										class="fa fa-star-o"></i>
 								</div>
-								<h5>$ ${item.price }</h5>
+								<h5> ${item.price } VND</h5>
 								<div class="product__color__select">
 									<label for="pc-16"> <input type="radio" id="pc-16">
 									</label> <label class="active black" for="pc-17"> <input
@@ -239,56 +193,6 @@
 	</section>
 	<!-- Product Section End -->
 
-	<!-- Categories Section Begin -->
-	<section class="categories spad">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3">
-					<div class="categories__text">
-						<h2>
-							SUPER73-S2 / Flannel Green <br /> <span>The Ford Bronco
-								Super73-S2 </span> <br /> SUPER73-S2 / Apollo White
-						</h2>
-					</div>
-				</div>
-				<div class="col-lg-4">
-					<div class="categories__hot__deal">
-						<img src="client/img/product-sale.png" alt="">
-						<div class="hot__deal__sticker">
-							<span>Sale Of</span>
-							<h5>$2009.99</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 offset-lg-1">
-					<div class="categories__deal__countdown">
-						<span>Deal Of The Week</span>
-						<h2>Multi-pocket Chest Bag Black</h2>
-						<div class="categories__deal__countdown__timer" id="countdown">
-							<div class="cd-item">
-								<span>3</span>
-								<p>Days</p>
-							</div>
-							<div class="cd-item">
-								<span>1</span>
-								<p>Hours</p>
-							</div>
-							<div class="cd-item">
-								<span>50</span>
-								<p>Minutes</p>
-							</div>
-							<div class="cd-item">
-								<span>18</span>
-								<p>Seconds</p>
-							</div>
-						</div>
-						<a href="#" class="primary-btn">Shop now</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Categories Section End -->
 
 	<!-- Instagram Section Begin -->
 	<section class="instagram spad">
@@ -313,70 +217,16 @@
 				<div class="col-lg-4">
 					<div class="instagram__text">
 						<h2>Instagram</h2>
-						<p>It's the Summer of '73! We want to see your vacation
-							adventures and weekend getaways! Where are you riding?⁠.</p>
-						<h3>5DEV SuperPhuc</h3>
+						<p>Đơn giản chỉ là dạo qua thứ được gọi là ước mơ hay là thứ sẽ trở thành sự thật! Lựa chọn giữa phương tiện và thứ gọi là dame mê :) kkk.</p>
+						<h3>SuperTeam</h3>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 	<!-- Instagram Section End -->
+	<br><br><br><br>
 
-	<!-- Latest Blog Section Begin -->
-	<section class="latest spad">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="section-title">
-						<span>Latest News</span>
-						<h2>Fashion New Trends</h2>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-4 col-md-6 col-sm-6">
-					<div class="blog__item">
-						<div class="blog__item__pic set-bg"
-							data-setbg="/client/img/blog/blog-1.jpg"></div>
-						<div class="blog__item__text">
-							<span><img src="img/icon/calendar.png" alt="">
-								Monday? Never heard of it. ⚡️😎</span>
-							<h5>Where are you and the Squad headed this weekend?</h5>
-							<a href="#">Read More</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 col-sm-6">
-					<div class="blog__item">
-						<div class="blog__item__pic set-bg"
-							data-setbg="/client/img/blog/blog-2.jpg"></div>
-						<div class="blog__item__text">
-							<span><img src="img/icon/calendar.png" alt=""> It’s
-								Ride Your Bike to Work Week! 🎉</span>
-							<h5>We’re celebrating all of the weekday commuters and
-								weekend warriors who ditch the gas tanks and cruise electric</h5>
-							<a href="#">Read More</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 col-sm-6">
-					<div class="blog__item">
-						<div class="blog__item__pic set-bg"
-							data-setbg="/client/img/blog/blog-3.jpg"></div>
-						<div class="blog__item__text">
-							<span><img src="img/icon/calendar.png" alt=""> 📷:
-								-@lalalalisa_m</span>
-							<h5>There’s still time to take $150 off your order of a
-								SUPER73-S1. All the cool kids are doing it. 😎⚡️</h5>
-							<a href="#">Read More</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Latest Blog Section End -->
 
 	<div>
 		<jsp:include page="/WEB-INF/views/footer.jsp" />

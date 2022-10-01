@@ -47,12 +47,11 @@ public class AccountController {
 	StaffService staffService;
 	@Autowired
 	FindUserService findUserService;
-	@Autowired
-	MailerService mailerService;
-	
+
 	@GetMapping("/account/login")
 	public String get_login(Model model) {
-		model.addAttribute("user1", cookie.getValue("user1"));	
+
+		model.addAttribute("user1", cookie.getValue("user1"));
 		loadNameAcount(model);
 		return "/account/login";
 	}
@@ -64,14 +63,14 @@ public class AccountController {
 		String pw = param.getString("password", "");
 		// chuc mang remember me
 		boolean rm = param.getBoolean("remember", false);
-		//thong bao khi loi
+		// thong bao khi loi
 		String message = "";
-		//check xem ten dg la nguoi dung hay nhan vien
-		Customer customer3= null;
+		// check xem ten dg la nguoi dung hay nhan vien
+		Customer customer3 = null;
 		Staff staff3 = null;
 		Optional<Customer> customerOP = customerService.findById(un);
 		Optional<Staff> staffOP = staffService.findById(un);
-	
+
 		// xu ly khi la khach hang
 		if (customerOP.isPresent()) {
 			customer3 = customerOP.get();
@@ -80,7 +79,7 @@ public class AccountController {
 				model.addAttribute("message", message);
 			} else if (!dologin(un, pw)) {
 				message = "Sai mật khẩu.";
-				model.addAttribute("user1",un);
+				model.addAttribute("user1", un);
 				model.addAttribute("message", message + " mk là:" + customer3.getPassword());
 			} else {
 				session.set("user", un);
@@ -92,30 +91,20 @@ public class AccountController {
 			staff3 = staffOP.get();
 			if (!dologin(un, pw)) {
 				message = "Sai mật khẩu.";
-				model.addAttribute("user1",un);
+				model.addAttribute("user1", un);
 				model.addAttribute("message", message + " mk là:" + staff3.getPassword());
 			} else {
 				session.set("user", un);
 				session.set("admin", "is Admin");
-				 /*can hoi phuc, check lai security-uri
-				 ===========================================================================
-				String uri = session.get("security-uri");
-				if (uri == null) {
-					message = "security-uri false";
-					model.addAttribute("message", message);
-				}
-				*/
 
 			}
 		}
-
-		// kime tra nut remember
 		if (rm == true) {
 			model.addAttribute("user1", cookie.add("user1", un, 10).getValue());
 		} else {
 			cookie.remove("user1");
 		}
-		
+
 		if (message.equals("")) {
 			return "redirect:/index";
 		} else {
@@ -129,6 +118,7 @@ public class AccountController {
 	// logout
 	@RequestMapping("/account/logout")
 	public String logout() {
+		cookie.remove("user1");
 		session.remove("user");
 		return "redirect:/account/login";
 	}
@@ -136,7 +126,7 @@ public class AccountController {
 	//////// dang ky
 	String errorRegis = "";
 
-	@RequestMapping("/account/register/index")
+	@GetMapping("/account/register/index")
 	public String registerIndex(Model model) {
 		Customer customer = new Customer();
 		model.addAttribute("item", customer);
@@ -164,16 +154,10 @@ public class AccountController {
 					item.setActive(false);
 					String ramdomCode = RandomString.make(10);
 					item.setVerificationCode(ramdomCode);
-					
+
 					customerService.save(item);
 					param.save(multipartFile, uploadDir);
-					
 					errorRegis = "Regist successfully";
-
-					//gui gmail
-//					String siteURL = Utility.getsiteURL(request);
-//					sendVerificationEmail(item, siteURL);
-//					errorRegis = "Please check your email to verify your account";
 
 				} else {
 					errorRegis = "Confirm password is incorrect";
@@ -181,40 +165,12 @@ public class AccountController {
 			} else {
 				errorRegis = "Id already exists";
 			}
-						return "redirect:/account/register/index";
+			return "redirect:/account/register/index";
 		} catch (Exception e) {
 			System.out.println("dang loi /account/register ");
 			loadNameAcount(model);
 			return "/account/REGISTRATION";
 		}
-	}
-
-	public void sendVerificationEmail(Customer item, String siteUrl) throws MessagingException {
-		String subject = "Please verify your registration";
-		String to = item.getEmail();
-		String from = "phuctlhps15061@fpt.edu.vn";
-		String body = "<p>Dear" + item.getFullname() + ",</p>";
-
-		body += "<p>Please click the link below to verify to your regisreation:</p>";
-
-		String verifyURL = siteUrl + "/verify?code=" + item.getVerificationCode();
-
-		body += "<h3><a href=\"" + verifyURL + "\">Verify</a></h3>";
-
-		body += "<p>Thank you <br>The superPhuc Team</p>";
-
-		mailerService.send(from, to, null, null, subject, body, null);
-	}
-
-	@GetMapping("/verify")
-	public String verifyCustomer(@Param("code") String code, Model model) {
-		System.out.println(code + "code ne");
-		boolean verified = customerService.verify(code);
-		String pageTitle = verified ? "Verification Succeeded!" : "Verification Failed";
-		errorRegis = pageTitle;
-	
-		return "redirect:/account/register/index";
-
 	}
 
 	// cap nhat tk
@@ -250,7 +206,7 @@ public class AccountController {
 		item.setActive(active);
 		customerService.save(item);
 		errorEdit = "Update successfully";
-		
+
 		return "redirect:/account/editprofile/index";
 	}
 
@@ -258,7 +214,7 @@ public class AccountController {
 	String errorPassword = "";
 
 	@RequestMapping("/account/change/index")
-	public String changePasswordIndex(Model model) {
+	public String x(Model model) {
 		String name1 = findUserService.findUser(session.get("user"));
 
 		String name = findUserService.findUserID(session.get("user"));
@@ -291,98 +247,19 @@ public class AccountController {
 				}
 			}
 		}
-	
+
 		return "redirect:/account/change/index";
 	}
 
-	// Quen mk
-	String errorForgot = "";
-	String checkCode = "";
-	String random = "";
-	String emailForgot = "";
-
-	@RequestMapping("/account/forgot/index")
-	public String forgotIndex(Model model) {
-
-		model.addAttribute("error", errorForgot);
-		model.addAttribute("checkcode", checkCode);
-		model.addAttribute("email", emailForgot);
-
-		errorForgot = "";
-		loadNameAcount(model);
-		return "/account/forgotPw";
-	}
-
-	@RequestMapping("/account/forgot")
-	public String forgot(Model model, @RequestParam("email") String email) throws MessagingException {
-		Optional<Customer> customerOP = customerDAO.findByEmail(email);
-		emailForgot = email;
-		if (customerOP.isPresent()) {
-			Customer customer = customerOP.get();
-			String randomCode = RandomString.make(8);
-
-			random = randomCode;
-
-			sendNewPassWordEmail(customer, randomCode);
-			errorForgot = "We have sent you a new code via email. Please check your email message notifications and\r\n"
-					+ "re-login";
-
-			checkCode = "1";
-		} else {
-			errorForgot = "The entered email is not found in the list";
-		}
-		
-		return "redirect:/account/forgot/index";
-	}
-
-	@RequestMapping("/account/forgot/reset")
-	public String resetPassword(@RequestParam("code") String code, @RequestParam("password") String password,
-			@RequestParam("password1") String password1, @RequestParam("email") String email, Model model) {
-		Optional<Customer> customerOP = customerDAO.findByEmail(email);
-		if (customerOP.isPresent()) {
-			if (code.equals(random)) {
-				if (password.equals(password1)) {
-					Customer customer = customerOP.get();
-					customer.setPassword(password1);
-					customerService.save(customer);
-					errorForgot = "Change password successfully";
-					checkCode = "";
-				} else {
-					errorForgot = "Confirmation password is not correct with new password";
-					checkCode = "1";
-				}
-			} else {
-				errorForgot = "The code is incorrect";
-				checkCode = "1";
-			}
-		}
-		
-		return "redirect:/account/forgot/index";
-	}
-
-	public void sendNewPassWordEmail(Customer item, String randomCode) throws MessagingException {
-		String subject = "Please check YOUR new password";
-		String to = item.getEmail();
-		String from = "TheSuperPhuc";
-		String body = "<p>Dear " + item.getFullname() + ",</p>";
-	
-		body += "<p> Please get this new password log back into your account and change password</p>";
-	
-		body += "<p> Your code <h2>" + randomCode + "</h2> </p>";
-	
-		body += "<p>Thank you <br>The superPhuc Team</p>";
-	
-		mailerService.send(from, to, null, null, subject, body, null);
-	}
 	public boolean dologin(String username, String password) {
 		Customer customer = null;
 		Staff staff = null;
-	
+
 		Optional<Customer> customerOP = customerService.findById(username);
 		Optional<Staff> staffOP = staffService.findById(username);
-	
+
 		boolean login = false;
-	
+
 		if (customerOP.isPresent()) {
 			customer = customerOP.get();
 			if (password.equals(customer.getPassword())) {
@@ -404,7 +281,7 @@ public class AccountController {
 			String name = findUserService.findUser(session.get("user"));
 			model.addAttribute("name", name);
 		} catch (Exception e) {
-			System.out.println(e+"loi kho load acount");
+			System.out.println(e + "loi kho load acount");
 		}
 	}
 
