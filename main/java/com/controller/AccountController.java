@@ -128,6 +128,7 @@ public class AccountController {
 
 	@GetMapping("/account/register/index")
 	public String registerIndex(Model model) {
+		loadNameAcount(model);
 		Customer customer = new Customer();
 		model.addAttribute("item", customer);
 
@@ -141,6 +142,7 @@ public class AccountController {
 	public String register(Customer item, Model model, @RequestParam("photo") MultipartFile multipartFile,
 			@RequestParam("password") String password, @RequestParam("password1") String password1,
 			HttpServletRequest request) throws MessagingException {
+		loadNameAcount(model);
 		try {
 			// neu chua ton tai khach hang
 			if (!customerService.existsById(item.getId())) {
@@ -180,6 +182,7 @@ public class AccountController {
 
 	@RequestMapping("/account/editprofile/index")
 	public String editProfileIndex(Model model) {
+		loadNameAcount(model);
 		Customer item = customerService.findById(session.get("user")).get();
 		active = item.getActive();
 		passwordEdit = item.getPassword();
@@ -193,6 +196,7 @@ public class AccountController {
 	@RequestMapping("/account/editprofile")
 	public String editProfile(Customer item, Model model, @RequestParam("photo") MultipartFile multipartFile,
 			@RequestParam("image1") String image1) {
+		loadNameAcount(model);
 		// upload hinh
 		String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
 		if (fileName.equals("")) {
@@ -215,7 +219,7 @@ public class AccountController {
 
 	@RequestMapping("/account/change/index")
 	public String x(Model model) {
-		String name1 = findUserService.findUser(session.get("user"));
+		loadNameAcount(model);
 
 		String name = findUserService.findUserID(session.get("user"));
 		model.addAttribute("userid", name);
@@ -229,6 +233,7 @@ public class AccountController {
 	@RequestMapping("/account/change")
 	public String changepassword(Model model, @RequestParam("password") String password,
 			@RequestParam("password1") String password1, @RequestParam("password2") String password2) {
+		loadNameAcount(model);
 		String name = findUserService.findUserID(session.get("user"));
 		Optional<Customer> customerOP = customerService.findById(name);
 		if (customerOP.isPresent()) {
@@ -249,6 +254,13 @@ public class AccountController {
 		}
 
 		return "redirect:/account/change/index";
+	}
+	
+	@RequestMapping("/account/forgot/index")
+	public String forgotIndex(Model model) {
+		loadNameAcount(model);
+	
+		return "/account/forgotPw";
 	}
 
 	public boolean dologin(String username, String password) {

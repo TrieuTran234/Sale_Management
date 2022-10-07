@@ -73,14 +73,9 @@
 					<ul>
 						<li class="active"><a href="/index">Trang Chủ</a></li>
 						<li><a href="/client/product">Sản Phẩm</a></li>
-						<li><a href="/about">Pages</a>
-							<ul class="dropdown">
-								<li><a href="/about">About Us</a></li>
-								<li><a href="/client/shoppingcart/index">Shopping Cart</a></li>
-								<li><a href="/blog-details">Blog Details</a></li>
-							</ul></li>
-						<li><a href="/blog">Bài Viết</a></li>
-						<li><a href="/contact">Liên Hệ</a></li>
+						
+						<li><a href="/contact">Liên Hệ</a></li><li>
+						<li><a href="/client/shoppingcart/index">Giỏ Hàng</a></li>
 					</ul>
 				</nav>
 			</div>
