@@ -115,7 +115,7 @@ public class ClientProductController {
 			model.addAttribute("page", page);
 		}
 		// sort and paniagte
-
+		loadNameAcount(model);
 		return "/client/shop";
 	}
 

@@ -74,7 +74,7 @@
 				lợi , nhanh chóng , và theo dõi hiệu quả nội dung trên tất cả video
 				và tối ưu hóa tiêu đề video để người dùng dễ dàng tiếp cận !</p>
 			<div
-				class="u-expanded-width u-black u-shape u-shape-rectangle u-shape-1"></div>
+				class="u-expanded-width u-red u-shape u-shape-rectangle u-shape-1"></div>
 			<div class="u-clearfix u-gutter-30 u-layout-wrap u-layout-wrap-1">
 				<div class="u-gutter-0 u-layout">
 					<div class="u-layout-col">
@@ -83,13 +83,17 @@
 								<div
 									class="u-container-style u-layout-cell u-size-60 u-layout-cell-1">
 									<div class="u-container-layout u-container-layout-1">
-										<h3 class="u-text u-text-3">PRODUCT EDIT</h3>
+										<h3>
+											<a 
+												href="/admin/product/list"> PRODUCT LIST</a>
+										</h3>
+										<br>
+										<hr>
 										<div class="u-video u-video-contain u-video-1">
 											<div class="embed-responsive embed-responsive-1">
 												<form:form action="/admin/product/index"
 													modelAttribute="item" method="post" style="height: 800px,">
 													<img src="/uploads/product/${item.image}" alt="" class="">
-													</video>
 												</form:form>
 
 											</div>
@@ -118,18 +122,18 @@
 															<path fill="currentColor" d="M4 8L0 4h8z"></path></svg>
 													</div>
 												</div>
+												<br>
 												<div class="u-form-group u-form-name">
 													<label for="name-6a67" class="u-label u-label-1">Product
 														ID</label>
 													<form:input path="id" type="text" placeholder=" ID"
 														id="name-6a67" name="id" value="${ids}"
-														class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"
-														required="required" />
+														class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" />
 												</div>
 												<br>
 												<div class="u-form-group">
 													<label for="email-6a67"
-														class="u-label u-label-2 u-text-white">Product
+														class="u-label u-label-2 u-text-black">Product
 														Name</label>
 													<form:input path="name" type="text"
 														placeholder="Enter name" id="email-6a67" name="name"
@@ -141,7 +145,7 @@
 
 												<div class="u-form-group">
 													<label for="email-6a67"
-														class="u-label u-label-2 u-text-white">Create Date</label>
+														class="u-label u-label-2 u-text-black">Create Date</label>
 													<form:input path="createDate" type="text"
 														placeholder="Enter a date" id="email-6a67"
 														name="createDate" value=""
@@ -174,9 +178,7 @@
 													<label for="image" class="custom-file-label">Image
 														<input type="text" name="image1" value="${item.image}"
 														readonly="true" style="border: none;">
-													</label> 
-													<br> 
-													<input type="file" accept=".jpg,.png"
+													</label> <br> <input type="file" accept=".jpg,.png"
 														class="u-border-none u-btn u-btn-submit u-button-style u-text-body-alt-color-black  u-btn-1 u-black"
 														id="image" name="photo" />
 
@@ -225,7 +227,7 @@
 												<input type="hidden" value="" name="recaptchaResponse">
 											</form:form>
 										</div>
-							
+
 									</div>
 								</div>
 							</div>
@@ -233,7 +235,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 		</div>
 	</section>
 

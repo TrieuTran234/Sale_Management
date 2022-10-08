@@ -117,6 +117,7 @@ public class AdminProductController {
 		} else {
 			error = "Id already exists";
 		}
+		
 		return "redirect:/admin/product/index";
 	}
 
@@ -163,7 +164,7 @@ public class AdminProductController {
 		model.addAttribute("items", items);
 		List<Category> listCategories = categoryService.findAll();
 		model.addAttribute("itemCate", listCategories);
-
+		loadNameAcount(model);
 		return "/admin/product-edit";
 	}
 	public void loadNameAcount(Model model) {

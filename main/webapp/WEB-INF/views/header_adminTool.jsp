@@ -146,45 +146,43 @@
 						<ul
 							class="u-align-center u-nav u-popupmenu-items u-spacing-9 u-text-hover-palette-3-light-1 u-unstyled u-nav-3">
 							<li class="u-nav-item"><a class="u-button-style u-nav-link"
-								href="/index" style="padding: 10px;">Home</a></li>
+								href="/index" style="padding: 10px;">Trang Chủ</a></li>
 							<li class="u-nav-item"><a class="u-button-style u-nav-link"
-								href="#" style="padding: 10px;">STAFF</a>
+								href="#" style="padding: 10px;">Nhân Viên</a>
 								<div class="u-nav-popup">
 									<ul
 										class="u-border-1 u-border-palette-3-light-1 u-h-spacing-9 u-nav u-unstyled u-v-spacing-5 u-nav-4">
 										<li class="u-nav-item"><a
-											class="u-button-style u-nav-link" href="/admin/staff/index">STAFF
-												EDITION</a></li>
+											class="u-button-style u-nav-link" href="/admin/staff/index">Chỉnh Sửa
+												</a></li>
 										<li class="u-nav-item"><a
-											class="u-button-style u-nav-link" href="/admin/staff/list">STAFF
-												LIST</a></li>
+											class="u-button-style u-nav-link" href="/admin/staff/list">DS Nhân Viên
+												</a></li>
 									</ul>
 								</div>
 							<li class="u-nav-item"><a class="u-button-style u-nav-link"
-								href="#" style="padding: 10px;">PRODUCT</a>
+								href="#" style="padding: 10px;">Sản Phẩm</a>
 								<div class="u-nav-popup">
 									<ul
 										class="u-border-1 u-border-palette-3-light-1 u-h-spacing-9 u-nav u-unstyled u-v-spacing-5 u-nav-4">
 										<li class="u-nav-item"><a
-											class="u-button-style u-nav-link" href="/admin/product/index">PRODUCT
-												EDITION</a></li>
+											class="u-button-style u-nav-link" href="/admin/product/index">Chỉnh Sửa
+												</a></li>
 										<li class="u-nav-item"><a
-											class="u-button-style u-nav-link" href="/admin/product/list">PRODUCT
-												LIST</a></li>
+											class="u-button-style u-nav-link" href="/admin/product/list">DS Sản Phẩm
+												</a></li>
 									</ul>
 								</div></li>
 							<li class="u-nav-item"><a class="u-button-style u-nav-link"
-								href="/admin/customer/index" style="padding: 10px;">USERS</a></li>
+								href="/admin/customer/index" style="padding: 10px;">Người Dùng</a></li>
 							<li class="u-nav-item"><a class="u-button-style u-nav-link"
 								href="/admin/order/index" style="padding: 10px;">ORDER</a></li>
 							<li class="u-nav-item"><a class="u-button-style u-nav-link"
-								href="/admin/category/index" style="padding: 10px;">CATEGORY</a>
+								href="/admin/category/index" style="padding: 10px;">Loại SP</a>
 							</li>
+							
 							<li class="u-nav-item"><a class="u-button-style u-nav-link"
-								href="/admin/promotion/index" style="padding: 10px;">PROMOTION</a>
-							</li>
-							<li class="u-nav-item"><a class="u-button-style u-nav-link"
-								href="/admin/report/index" style="padding: 10px;">REPORT</a></li>
+								href="/admin/report/index" style="padding: 10px;">Thống Kê</a></li>
 						</ul>
 					</div>
 				</div>
@@ -209,8 +207,7 @@
 	s-17-7.626-17-17S14.61,6,23.984,6z"></path></svg>
 				</span>
 			</button>
-			<input class="u-search-input" type="search" name="search" value=""
-				placeholder="Search">
+			
 		</form>
 
 	</div>

@@ -11,7 +11,7 @@
     <meta name="keywords" content="INTUITIVE">
     <meta name="description" content="">
     <meta name="page_type" content="np-template-header-footer-from-plugin">
-    <title>USER</title>
+    <title>Người Dùng</title>
     <link rel="stylesheet" href="/admin/nicepage.css" media="screen">
 <link rel="stylesheet" href="/admin/REPORTS.css" media="screen">
 <link rel="stylesheet" href="/admin/REGISTRATION.css" media="screen">
@@ -207,11 +207,10 @@ background-image: linear-gradient(355deg, #000000 20%, #ffffff 74%);
                           	<th class="u-border-2 u-border-black u-table-cell">Image</th>
                             <th class="u-border-2 u-border-black u-table-cell">Id</th>
                             <th class="u-border-2 u-border-black u-table-cell">FULLname</th>
-                            <th class="u-border-2 u-border-black u-table-cell">password</th>
+                            
                             <th class="u-border-2 u-border-black u-table-cell">Birthday</th>
                             <th class="u-border-2 u-border-black u-table-cell">Active</th>
                             <th class="u-border-2 u-border-black u-table-cell">phone</th>
-                            <th class="u-border-2 u-border-black u-table-cell">address</th>
                              <th class="u-border-2 u-border-black u-table-cell">edit</th>
                           </tr>
                         </thead>
@@ -221,11 +220,10 @@ background-image: linear-gradient(355deg, #000000 20%, #ffffff 74%);
                             <td class="u-border-2 u-border-grey-90 u-table-cell u-table-cell-21"><img alt="" src="/uploads/${item.image }" style="width: 70px; height: 70px"></td>
                             <td class="u-border-2 u-border-grey-90 u-palette-1-light-3 u-table-cell u-table-cell-22">${item.id }</td>
                             <td class="u-border-2 u-border-grey-90 u-palette-1-light-3 u-table-cell u-table-cell-23"> ${item.fullname }</td>
-                            <td class="u-border-2 u-border-grey-90 u-palette-1-light-3 u-table-cell u-table-cell-24"> ${item.password }</td>
+                            
                             <td class="u-border-2 u-border-grey-90 u-palette-1-light-3 u-table-cell u-table-cell-25"> ${item.dateofBirth }</td>
                             <td class="u-border-2 u-border-grey-90 u-palette-1-light-3 u-table-cell u-table-cell-26">${item.active?'yes':'no'}</td>
                             <td class="u-border-2 u-border-grey-90 u-palette-1-light-3 u-table-cell u-table-cell-27">${item.phone}</td>
-                            <td class="u-border-2 u-border-grey-90 u-palette-1-light-3 u-table-cell u-table-cell-28">${item.address}</td>
                           	<td class="u-border-2 u-border-grey-90 u-palette-1-light-3 u-table-cell u-table-cell-29"> <button formaction="/admin/customer/edit/${item.id}" style="width:50px ;height:40px;background-color:black ; color:white ;">Edit</button> </td>
                           	<td class="u-border-2 u-border-grey-90 u-palette-1-light-3 u-table-cell u-table-cell-30"> <button formaction="/admin/customer/delete/${item.id}" style="width:50px ;height:40px;background-color:black ; color:white ;">Del</button> </td>
                           </tr>

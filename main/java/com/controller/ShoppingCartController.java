@@ -47,8 +47,8 @@ public class ShoppingCartController {
 
 	@RequestMapping("/client/shoppingcart/index")
 	public String viewCarts(Model model) {
+		loadNameAcount(model);
 		try {
-
 			Optional<Customer> customerOP = customerService.findById(session.get("user"));
 			if (customerOP.isPresent()) {
 				double sumPrice = 0;
@@ -57,19 +57,19 @@ public class ShoppingCartController {
 				}
 				model.addAttribute("price", sumPrice);
 				model.addAttribute("cart_item", cartItemDAO.findByCustomer(customerOP.get()));
-				System.out.println( cartItemDAO.findByCustomer(customerOP.get()).size());
+				System.out.println(cartItemDAO.findByCustomer(customerOP.get()).size());
 			}
 		} catch (Exception e) {
 			double sumPrice = 0;
 			for (Item item : shoppingCartService.getItems()) {
 				sumPrice += (item.getPrice() * item.getQty());
-				
+
 			}
 			model.addAttribute("error1", "bug");
 			model.addAttribute("price", sumPrice);
 			model.addAttribute("cart_item", shoppingCartService.getItems());
 		}
-		
+
 		return "/client/shopping-cart";
 	}
 
@@ -78,13 +78,9 @@ public class ShoppingCartController {
 
 		Optional<Product> productOP = productService.findById(id);
 		try {
-
 			Optional<Customer> customerOP = customerService.findById(session.get("user"));
-
 			if (customerOP.isPresent()) {
-
 				if (productOP.isPresent()) {
-
 					Product product = productOP.get();
 					Customer customer = customerOP.get();
 					CartItem item = new CartItem();
@@ -124,10 +120,8 @@ public class ShoppingCartController {
 	@RequestMapping("/client/shoppingcart/remove/{id}")
 	public String remove(@PathVariable("id") Integer id) {
 		try {
-
 			Optional<Customer> customerOP = customerService.findById(session.get("user"));
 			if (customerOP.isPresent()) {
-
 				cartItemService.deleteById(id);
 			}
 		} catch (Exception e) {
@@ -139,13 +133,12 @@ public class ShoppingCartController {
 	@RequestMapping("/client/shoppingcart/update/{id}")
 	public String update(@PathVariable("id") Integer id, @RequestParam("qty") int qty) {
 		try {
-
 			Optional<Customer> customerOP = customerService.findById(session.get("user"));
 			if (customerOP.isPresent()) {
 				Optional<CartItem> itemOP = cartItemService.findById(id);
 				if (itemOP.isPresent()) {
 					CartItem item = itemOP.get();
-					
+
 					cartItemService.update(item, qty);
 				}
 			}
@@ -174,6 +167,16 @@ public class ShoppingCartController {
 			shoppingCartService.clear();
 		}
 		return "redirect:/client/shoppingcart/index";
+	}
+
+	public void loadNameAcount(Model model) {
+		try {
+			// Đọc giá trị của attribute trong session
+			String name = findUserService.findUser(session.get("user"));
+			model.addAttribute("name", name);
+		} catch (Exception e) {
+			System.out.println(e + "loi kho load acount");
+		}
 	}
 
 }

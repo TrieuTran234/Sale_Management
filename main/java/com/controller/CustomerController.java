@@ -18,7 +18,7 @@ import com.service.ParamService;
 import com.service.SessionService;
 
 
-//@Controller
+@Controller
 public class CustomerController {
 	@Autowired
 	CustomerService customerService;
@@ -45,7 +45,6 @@ public class CustomerController {
 
 	@RequestMapping("/admin/customer/list")
 	public String list(Model model) {
-		
 		Customer customer = new Customer();
 		model.addAttribute("item", customer);
 		List<Customer> listCustomers=customerService.findAll();
