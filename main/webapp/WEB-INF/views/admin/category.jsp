@@ -65,6 +65,10 @@
 		<jsp:include page="/WEB-INF/views/header_adminTool.jsp" />
 	</div>
 
+
+	<section class="u-clearfix  u-section-1" id="carousel_c874" style="background-color: #000000;
+background-image:url('/admin/img/backroundsuper73.jpg');background-repeat: no-repeat;
+    ">
     <div class="u-clearfix u-sheet u-sheet-1" style="margin-left: 27%">
     	
     	<form:form

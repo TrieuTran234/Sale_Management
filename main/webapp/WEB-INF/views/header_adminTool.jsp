@@ -111,7 +111,7 @@
 				<ul class="u-nav u-spacing-2 u-unstyled u-nav-1">
 					<li class="u-nav-item"><a
 						class="u-active-palette-3-light-1 u-button-style u-hover-palette-3-light-1 u-nav-link u-text-active-white u-text-grey-90 u-text-hover-white"
-						href="ADMINISTRATION-TOOL.jsp" style="padding: 10px;">ADMINISTRATION
+						href="ADMINISTRATION-TOOL.jsp" style="padding: 10px;">ADMIN
 							TOOL</a></li>
 					<li class="u-nav-item"><a
 						class="u-active-palette-3-light-1 u-button-style u-hover-palette-3-light-1 u-nav-link u-text-active-white u-text-grey-90 u-text-hover-white"
