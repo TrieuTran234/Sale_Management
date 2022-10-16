@@ -13,6 +13,8 @@ import com.entitySQL.OrderStatus;
 public interface OrderDAO extends PagingAndSortingRepository<Order, Integer> {
 	List<Order> findByOrderstatus(OrderStatus orderstatus);
 	
+	
+	//tạo report theo tháng: ngày tạo giá, số lượng
 	@Query("SELECT new ReportMonth( MONTH(o.createDate),sum(o.price), count(o)) "
 			+ " FROM Order o "
 			+ " GROUP BY MONTH(o.createDate)"

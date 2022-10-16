@@ -17,11 +17,11 @@ public class InterConfig implements WebMvcConfigurer {
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(auth)
 		.addPathPatterns("/admin/**","/account/change/index","/account/change",
-				"/account/editprofile/index","/account/editprofile")
+				"/account/editprofile/index","/account/editprofile","/client/shoppingcart/index","/client/order/index")
 		
 		;
 		registry.addInterceptor(global).addPathPatterns("/account/login","/account/editprofile/index","/account/register/index","/account/change/index",
-				"/client/shoppingcart/index","/client/shopdetail/index/{id}","/client/order/index","/client/product","/index","/blog","/contact","/about");
+				"/client/shopdetail/index/{id}","/client/product","/index","/blog","/contact","/about");
 		
 	}
 	
