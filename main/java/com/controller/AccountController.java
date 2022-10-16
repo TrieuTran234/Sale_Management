@@ -99,13 +99,16 @@ public class AccountController {
 
 			}
 		}
+
 		if (rm == true) {
 			model.addAttribute("user1", cookie.add("user1", un, 10).getValue());
 		} else {
 			cookie.remove("user1");
 		}
-
-		if (message.equals("")) {
+		
+		session.set("user", un);
+		String uri = session.get("security-uri");
+		if (uri != null) {
 			return "redirect:/index";
 		} else {
 			session.set("admin", null);
@@ -255,11 +258,11 @@ public class AccountController {
 
 		return "redirect:/account/change/index";
 	}
-	
+
 	@RequestMapping("/account/forgot/index")
 	public String forgotIndex(Model model) {
 		loadNameAcount(model);
-	
+
 		return "/account/forgotPw";
 	}
 
