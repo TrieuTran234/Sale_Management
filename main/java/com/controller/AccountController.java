@@ -47,6 +47,8 @@ public class AccountController {
 	StaffService staffService;
 	@Autowired
 	FindUserService findUserService;
+	@Autowired
+	MailerService mailerService;
 
 	@GetMapping("/account/login")
 	public String get_login(Model model) {
@@ -105,7 +107,7 @@ public class AccountController {
 		} else {
 			cookie.remove("user1");
 		}
-		
+
 		session.set("user", un);
 		String uri = session.get("security-uri");
 		if (uri != null) {
@@ -184,7 +186,7 @@ public class AccountController {
 	boolean active;
 
 	@RequestMapping("/account/editprofile/index")
-	public String editProfileIndex(Model model) {
+	public String getEditProfile(Model model) {
 		loadNameAcount(model);
 		Customer item = customerService.findById(session.get("user")).get();
 		active = item.getActive();
@@ -197,7 +199,7 @@ public class AccountController {
 	}
 
 	@RequestMapping("/account/editprofile")
-	public String editProfile(Customer item, Model model, @RequestParam("photo") MultipartFile multipartFile,
+	public String postEditProfile(Customer item, Model model, @RequestParam("photo") MultipartFile multipartFile,
 			@RequestParam("image1") String image1) {
 		loadNameAcount(model);
 		// upload hinh
@@ -221,7 +223,7 @@ public class AccountController {
 	String errorPassword = "";
 
 	@RequestMapping("/account/change/index")
-	public String x(Model model) {
+	public String getChangePass(Model model) {
 		loadNameAcount(model);
 
 		String name = findUserService.findUserID(session.get("user"));
@@ -234,7 +236,7 @@ public class AccountController {
 	}
 
 	@RequestMapping("/account/change")
-	public String changepassword(Model model, @RequestParam("password") String password,
+	public String postChangePassword(Model model, @RequestParam("password") String password,
 			@RequestParam("password1") String password1, @RequestParam("password2") String password2) {
 		loadNameAcount(model);
 		String name = findUserService.findUserID(session.get("user"));
@@ -259,11 +261,86 @@ public class AccountController {
 		return "redirect:/account/change/index";
 	}
 
+
+///////////////////////////// Quen mk
+	String errorForgot = "";
+	String checkCode = "";
+	String random = "";
+	String emailForgot = "";
+
 	@RequestMapping("/account/forgot/index")
 	public String forgotIndex(Model model) {
-		loadNameAcount(model);
 
+		model.addAttribute("error", errorForgot);
+		model.addAttribute("checkcode", checkCode);
+		model.addAttribute("email", emailForgot);
+
+		errorForgot = "";
 		return "/account/forgotPw";
+	}
+
+	@RequestMapping("/account/forgot")
+	public String forgot(Model model, @RequestParam("email") String email) throws MessagingException {
+		
+		Optional<Customer> customerOP = customerDAO.findByEmail(email);
+		emailForgot = email;
+		if (customerOP.isPresent()) {
+			Customer customer = customerOP.get();
+			String randomCode = RandomString.make(8);
+
+			random = randomCode;
+
+			sendNewPassWordEmail(customer, randomCode);
+			errorForgot = "We have sent you a new code via email. Please check your email message notifications and\r\n"
+					+ "re-login";
+
+			checkCode = "1";
+		} else {
+			errorForgot = "The entered email is not found in the list";
+		}
+
+		return "redirect:/account/forgot/index";
+	}
+
+	@RequestMapping("/account/forgot/reset")
+	public String resetPassword(@RequestParam("code") String code, @RequestParam("password") String password,
+			@RequestParam("password1") String password1, @RequestParam("email") String email, Model model) {
+		
+		Optional<Customer> customerOP = customerDAO.findByEmail(email);
+		if (customerOP.isPresent()) {
+			if (code.equals(random)) {
+				if (password.equals(password1)) {
+					Customer customer = customerOP.get();
+					customer.setPassword(password1);
+					customerService.save(customer);
+					errorForgot = "Change password successfully";
+					checkCode = "";
+				} else {
+					errorForgot = "Confirmation password is not correct with new password";
+					checkCode = "1";
+				}
+			} else {
+				errorForgot = "The code is incorrect";
+				checkCode = "1";
+			}
+		}
+
+		return "redirect:/account/forgot/index";
+	}
+
+	public void sendNewPassWordEmail(Customer item, String randomCode) throws MessagingException {
+		String subject = "Please check YOUR new password";
+		String to = item.getEmail();
+		String from = "TheSuperPhuc";
+		String body = "<p>Dear " + item.getFullname() + ",</p>";
+
+		body += "<p> Please get this new password log back into your account and change password</p>";
+
+		body += "<p> Your code <h2>" + randomCode + "</h2> </p>";
+
+		body += "<p>Thank you <br>The superPhuc Team</p>";
+
+		mailerService.send(from, to, null, null, subject, body, null);
 	}
 
 	public boolean dologin(String username, String password) {

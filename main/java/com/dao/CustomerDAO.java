@@ -19,6 +19,7 @@ public interface CustomerDAO extends PagingAndSortingRepository<Customer, String
 	Optional<Customer> findByVerificationCode(String verificationCode);
 	
 	Optional<Customer> findByEmail(String email);
+	
 	@Query("SELECT o FROM Customer o WHERE o.fullname LIKE ?1")
 	Page<Customer> findByKeywords(String keywords, Pageable pageable);
 	
