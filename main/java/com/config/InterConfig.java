@@ -16,10 +16,12 @@ public class InterConfig implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(auth)
+		//chặn
 		.addPathPatterns("/admin/**","/account/change/index","/account/change",
 				"/account/editprofile/index","/account/editprofile","/client/shoppingcart/index","/client/order/index")
 		
 		;
+		//cho phép truy cập
 		registry.addInterceptor(global).addPathPatterns("/account/login","/account/editprofile/index","/account/register/index","/account/change/index",
 				"/client/shopdetail/index/{id}","/client/product","/index","/blog","/contact","/about");
 		

@@ -28,22 +28,31 @@ public class CategoryController {
 
 	@RequestMapping("/admin/category/index")
 	public String index(Model model) {
+		//load tên của admin
 		loadNameAcount(model);
+		//đổ dữ liệu trông lên form
 		Category item = new Category();
 		model.addAttribute("item", item);
+		//load database
 		List<Category> listItem = categoryService.findAll();
+		
 		model.addAttribute("items", listItem);
 		model.addAttribute("error", error);
+		
 		error="";
 		return "/admin/category";
 	}
 
 	@RequestMapping("/admin/category/edit/{id}")
 	public String edit(Model model, @PathVariable("id") String id) {
+	
 		loadNameAcount(model);
+		
 		Category item = categoryService.findById(id).get();
+		
 		model.addAttribute("item", item);
 		List<Category> items = categoryService.findAll();
+		
 		model.addAttribute("items", items);
 		return "/admin/category";
 	}
