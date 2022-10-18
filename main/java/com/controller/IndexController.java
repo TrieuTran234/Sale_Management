@@ -45,6 +45,7 @@ public class IndexController {
 
 	@RequestMapping("/index")
 	public String index(Model model) {
+		loadNameAcount( model);
 		// thuat toan sap xep
 		Pageable pageable = PageRequest.of(0, 5, Sort.by(Direction.ASC, "createDate"));
 
@@ -77,6 +78,15 @@ public class IndexController {
 		}
 
 		return "/client/index";
+	}
+	public void loadNameAcount(Model model) {
+		try {
+			// Đọc giá trị của attribute trong session
+			String name = findUserService.findUser(session.get("user"));
+			model.addAttribute("name", name);
+		} catch (Exception e) {
+			System.out.println(e + "loi kho load acount");
+		}
 	}
 
 	

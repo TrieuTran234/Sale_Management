@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.entitySQL.Category;
 import com.service.CategoryService;
+import com.service.FindUserService;
+import com.service.SessionService;
 
 
 
@@ -17,11 +19,16 @@ import com.service.CategoryService;
 public class CategoryController {
 	@Autowired
 	CategoryService categoryService;
+	@Autowired
+	FindUserService findUserService;
+	@Autowired
+	SessionService session;
 
 	String error = "";
 
 	@RequestMapping("/admin/category/index")
 	public String index(Model model) {
+		loadNameAcount(model);
 		Category item = new Category();
 		model.addAttribute("item", item);
 		List<Category> listItem = categoryService.findAll();
@@ -33,6 +40,7 @@ public class CategoryController {
 
 	@RequestMapping("/admin/category/edit/{id}")
 	public String edit(Model model, @PathVariable("id") String id) {
+		loadNameAcount(model);
 		Category item = categoryService.findById(id).get();
 		model.addAttribute("item", item);
 		List<Category> items = categoryService.findAll();
@@ -59,7 +67,7 @@ public class CategoryController {
 			categoryService.save(item);
 			error = "";
 		}
-
+		loadNameAcount(model);
 		return "redirect:/admin/category/index";
 	}
 
@@ -67,5 +75,14 @@ public class CategoryController {
 	public String delete(@PathVariable("id") String id) {
 		categoryService.deleteById(id);
 		return "redirect:/admin/category/index";
+	}
+	public void loadNameAcount(Model model) {
+		try {
+			// Đọc giá trị của attribute trong session
+			String name = findUserService.findUser(session.get("user"));
+			model.addAttribute("name", name);
+		} catch (Exception e) {
+			System.out.println(e+"loi kho load acount");
+		}
 	}
 }

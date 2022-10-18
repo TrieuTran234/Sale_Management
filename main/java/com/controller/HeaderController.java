@@ -18,23 +18,23 @@ public class HeaderController {
 	@Autowired
 	SessionService session;
 
-
-
-	
 	@RequestMapping("/about")
 	public String about(Model model) {
-		model.addAttribute("user1", cookie.getValue("user1"));	
+		model.addAttribute("user1", cookie.getValue("user1"));
 		loadNameAcount(model);
 		return "/client/about";
 	}
 
 	@RequestMapping("/contact")
-	public String contact() {
+	public String contact(Model model) {
+		loadNameAcount(model);
+
 		return "/client/contact";
 	}
 
 	@RequestMapping("/shop-details")
-	public String shopdetails() {
+	public String shopdetails(Model model) {
+		loadNameAcount(model);
 		return "/client/shop-details";
 	}
 
@@ -44,28 +44,31 @@ public class HeaderController {
 	}
 
 	@RequestMapping("/blog-details")
-	public String blogdetails() {
+	public String blogdetails(Model model) {
+		loadNameAcount(model);
 		return "/client/blog-details";
 	}
 
 	@RequestMapping("/blog")
-	public String blog() {
+	public String blog(Model model) {
+		loadNameAcount(model);
 		return "/client/blog";
 	}
 
 	@RequestMapping("/admin/order")
-	public String order() {
+	public String order(Model model) {
+		loadNameAcount(model);
 		return "/admin/order";
 	}
+
 	public void loadNameAcount(Model model) {
 		try {
 			// Đọc giá trị của attribute trong session
 			String name = findUserService.findUser(session.get("user"));
 			model.addAttribute("name", name);
 		} catch (Exception e) {
-			System.out.println(e+"loi kho load acount");
+			System.out.println(e + "loi kho load acount");
 		}
 	}
-
 
 }

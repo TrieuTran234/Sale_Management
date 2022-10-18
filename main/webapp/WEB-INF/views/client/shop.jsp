@@ -90,19 +90,19 @@
 								<div class="card">
 									<div class="card-heading">
 										<a data-toggle="collapse" data-target="#collapseThree">Filter
-											Price(Not yet)</a>
+											Price</a>
 									</div>
 									<div id="collapseThree" class="collapse "
 										data-parent="#accordionExample">
 										<div class="card-body">
 											<div class="shop__sidebar__price">
 												<ul>
-													<li><a href="#">$500.00 - $1000.00</a></li>
-													<li><a href="#">$1000.00 - $1500.00</a></li>
-													<li><a href="#">$1500.00 - $2000.00</a></li>
-													<li><a href="#">$2000.00 - $2500.00</a></li>
-													<li><a href="#">$2500.00 - $3000.00</a></li>
-													<li><a href="#">3000.00+</a></li>
+													<li><a href="/product/search/price1">0 - 20 Triệu</a></li>
+													<li><a href="/product/search/price2">21 - 50 Triệu</a></li>
+													<li><a href="/product/search/price3">51 - 100 Triệu</a></li>
+													<li><a href="/product/search/price4">101 - 500 Triệu</a></li>
+													<li><a href="#">501 + Triệu</a></li>
+												
 												</ul>
 											</div>
 										</div>

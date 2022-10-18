@@ -79,10 +79,10 @@ public class AccountController {
 			if (customer3.getActive() == false) {
 				message = "Tài khoản chưa được kịch hoạt.";
 				model.addAttribute("message", message);
-			} else if (!dologin(un, pw)) {
-				message = "Sai mật khẩu.";
+			} else if (!checkLogin(un, pw)) {
+				message = "Sai mật khẩu."+ " mk là:" + customer3.getPassword();
 				model.addAttribute("user1", un);
-				model.addAttribute("message", message + " mk là:" + customer3.getPassword());
+				model.addAttribute("message", message );
 			} else {
 				session.set("user", un);
 				session.set("admin", null);
@@ -91,12 +91,12 @@ public class AccountController {
 		// xy ly khi la nhan vien
 		if (staffOP.isPresent()) {
 			staff3 = staffOP.get();
-			if (!dologin(un, pw)) {
-				message = "Sai mật khẩu.";
+			if (!checkLogin(un, pw)) {
+				message = "Sai mật khẩu."+ " mk là:" + staff3.getPassword();
 				model.addAttribute("user1", un);
-				model.addAttribute("message", message + " mk là:" + staff3.getPassword());
+				model.addAttribute("message", message );
 			} else {
-				session.set("user", un);
+				session.set("user", un);        
 				session.set("admin", "is Admin");
 
 			}
@@ -107,14 +107,29 @@ public class AccountController {
 		} else {
 			cookie.remove("user1");
 		}
+		// neu dang nhap thanh cong
+		if (message.equals("")) {
+			message = "Login in successfully";
+			session.set("user", un);
+			String uri = session.get("security-uri");
 
-		session.set("user", un);
-		String uri = session.get("security-uri");
-		if (uri != null) {
+			if (uri != null) {
+
+				return "redirect:/index";
+
+			} else {
+				message = "Login in successfully";
+
+			}
+
+		} else {
+			model.addAttribute("message", message);
+		}
+		String name = findUserService.findUser(session.get("user"));
+
+		if (message.equals("Login in successfully")) {
 			return "redirect:/index";
 		} else {
-			session.set("admin", null);
-			session.set("user", null);
 			return "/account/login";
 		}
 
@@ -187,7 +202,6 @@ public class AccountController {
 
 	@RequestMapping("/account/editprofile/index")
 	public String getEditProfile(Model model) {
-		loadNameAcount(model);
 		Customer item = customerService.findById(session.get("user")).get();
 		active = item.getActive();
 		passwordEdit = item.getPassword();
@@ -224,7 +238,6 @@ public class AccountController {
 
 	@RequestMapping("/account/change/index")
 	public String getChangePass(Model model) {
-		loadNameAcount(model);
 
 		String name = findUserService.findUserID(session.get("user"));
 		model.addAttribute("userid", name);
@@ -261,8 +274,7 @@ public class AccountController {
 		return "redirect:/account/change/index";
 	}
 
-
-///////////////////////////// Quen mk
+	// Quen mk
 	String errorForgot = "";
 	String checkCode = "";
 	String random = "";
@@ -281,7 +293,7 @@ public class AccountController {
 
 	@RequestMapping("/account/forgot")
 	public String forgot(Model model, @RequestParam("email") String email) throws MessagingException {
-		
+
 		Optional<Customer> customerOP = customerDAO.findByEmail(email);
 		emailForgot = email;
 		if (customerOP.isPresent()) {
@@ -305,7 +317,7 @@ public class AccountController {
 	@RequestMapping("/account/forgot/reset")
 	public String resetPassword(@RequestParam("code") String code, @RequestParam("password") String password,
 			@RequestParam("password1") String password1, @RequestParam("email") String email, Model model) {
-		
+
 		Optional<Customer> customerOP = customerDAO.findByEmail(email);
 		if (customerOP.isPresent()) {
 			if (code.equals(random)) {
@@ -343,7 +355,7 @@ public class AccountController {
 		mailerService.send(from, to, null, null, subject, body, null);
 	}
 
-	public boolean dologin(String username, String password) {
+	public boolean checkLogin(String username, String password) {
 		Customer customer = null;
 		Staff staff = null;
 

@@ -30,6 +30,7 @@ import com.entitySQL.OrderStatus;
 import com.entitySQL.StatusDetail;
 import com.service.CartItemService;
 import com.service.CustomerService;
+import com.service.FindUserService;
 import com.service.ItemOrderService;
 import com.service.MailerService;
 import com.service.OrderDetailsService;
@@ -77,11 +78,16 @@ public class OrderController {
 	ShoppingCartService shoppingCartService;
 	@Autowired
 	MailerService mailerService;
+	@Autowired
+	FindUserService findUserService;
+	@Autowired
+	SessionService session;
 	double sum = 0;
 	String error = "";
 
 	@RequestMapping("/client/order/index")
 	public String index(Model model) {
+		loadNameAcount( model);
 		try {
 
 			Optional<Customer> customerOP = customerService.findById(sessionService.get("user"));
@@ -362,6 +368,7 @@ public class OrderController {
 	// admin
 	@RequestMapping("/admin/order/index")
 	public String adminOrder(Model model) {
+		loadNameAcount( model);
 		OrderStatus orderStatus = orderStatusDAO.findById("CG").get();
 		List<Order> list = orderDAO.findByOrderstatus(orderStatus);
 		List<Order> listDG = orderDAO.findByOrderstatus(orderStatusDAO.findById("DG").get());
@@ -374,6 +381,7 @@ public class OrderController {
 
 	@RequestMapping("/admin/orderdetail/{id}")
 	public String adminOrder1(Model model, @PathVariable("id") Integer id) {
+		loadNameAcount( model);
 
 		Order order = orderService.findById(id).get();
 		List<OrderDetail> listOrderDetails = orderDetailsDAO.findByOrder(order);
@@ -384,7 +392,7 @@ public class OrderController {
 
 	@RequestMapping("/admin/orderupdate/dg/{id}")
 	public String adminUpdateSttDG(Model model, @PathVariable("id") Integer id) {
-
+		loadNameAcount( model);
 		Order order = orderService.findById(id).get();
 		OrderStatus orderStatus = orderStatusDAO.findById("DG").get();
 		order.setOrderstatus(orderStatus);
@@ -395,7 +403,7 @@ public class OrderController {
 
 	@RequestMapping("/admin/orderupdate/tc/{id}")
 	public String adminUpdateSttTC(Model model, @PathVariable("id") Integer id) {
-
+		loadNameAcount( model);
 		Order order = orderService.findById(id).get();
 		OrderStatus orderStatus = orderStatusDAO.findById("TC").get();
 		order.setOrderstatus(orderStatus);
@@ -421,5 +429,13 @@ public class OrderController {
 
 		mailerService.send(from, to, null, null, subject, body, null);
 	}
-
+	public void loadNameAcount(Model model) {
+		try {
+			// Đọc giá trị của attribute trong session
+			String name = findUserService.findUser(session.get("user"));
+			model.addAttribute("name", name);
+		} catch (Exception e) {
+			System.out.println(e + "loi kho load acount");
+		}
+	}
 }

@@ -53,6 +53,7 @@ public class ProductController {
 	@RequestMapping("/admin/product/index")
 	public String index(Model model) {
 		Product product = new Product();
+		loadNameAcount( model);
 		model.addAttribute("item", product);
 		
 		List<Product> listProducts = productService.findAll();
@@ -68,8 +69,9 @@ public class ProductController {
 	}
 
 	@RequestMapping("/admin/product/list")
-	public String list(Model model, @RequestParam("p") Optional<Integer> p,
+	public String getProductByKeyWord(Model model, @RequestParam("p") Optional<Integer> p,
 			@RequestParam("keywords") Optional<String> kw, @RequestParam("field") Optional<String> field) {
+		loadNameAcount( model);
 		Product product = new Product();
 		model.addAttribute("item", product);
 		// search
@@ -91,7 +93,7 @@ public class ProductController {
 
 	//create
 	@RequestMapping("/admin/product/create")
-	public String staffcreate(Product product, @RequestParam("photo") MultipartFile multipartFile) {
+	public String createProduct(Product product, @RequestParam("photo") MultipartFile multipartFile) {
 		if (!productService.existsById(product.getId())) {
 			// upload hinh
 			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
@@ -107,9 +109,9 @@ public class ProductController {
 	}
 
 	@RequestMapping("/admin/product/update")
-	public String update(Product item, Model model, @RequestParam("photo") MultipartFile multipartFile,
+	public String updateProduct(Product item, Model model, @RequestParam("photo") MultipartFile multipartFile,
 			@RequestParam("image1") String image1) {
-
+		loadNameAcount( model);
 		if (!productService.existsById(item.getId())) {
 
 			error = "Id to update is not in the list";
@@ -136,14 +138,14 @@ public class ProductController {
 	}
 
 	@RequestMapping("/admin/product/delete/{id}")
-	public String delete(@PathVariable("id") String id) {
+	public String deleteProduct(@PathVariable("id") String id) {
 		productService.deleteById(Integer.parseInt(id));
 		return "redirect:/admin/product/list";
 	}
 
 	@RequestMapping("/admin/product/edit/{id}")
-	public String edit(Model model, @PathVariable("id") String id) {
-		
+	public String editProduct(Model model, @PathVariable("id") String id) {
+		loadNameAcount( model);
 		Product item = productService.findById(Integer.parseInt(id)).get();
 		model.addAttribute("item", item);
 		List<Product> items = productService.findAll();
@@ -158,6 +160,7 @@ public class ProductController {
 	@RequestMapping("/client/product")
 	public String clientproductpanigate(Model model, @RequestParam("p") Optional<Integer> p,
 			@RequestParam("keywords") Optional<String> kw, @RequestParam("field") Optional<String> field) {
+		loadNameAcount( model);
 		// search
 		String kwords = "";
 		if (kw.isPresent()) {
@@ -170,11 +173,12 @@ public class ProductController {
 		// field category
 		List<Category> listCategories = categoryService.findAll();
 		model.addAttribute("itemCate", listCategories);
-		String name = findUserService.findUser(session.get("user"));
 
 		// sort and paniagte
 		Pageable pageable = PageRequest.of(p.orElse(0), 6, Sort.by(Direction.DESC, field.orElse("price")));
+		
 		Page<Product> page = productDAO.findByKeywords("%" + kwords + "%", pageable);
+		
 		model.addAttribute("field", field.orElse("price").toUpperCase());
 		model.addAttribute("page", page);
 
@@ -186,6 +190,7 @@ public class ProductController {
 	public String clientProductFindbyCate(@PathVariable("id") String id, Model model,
 			@RequestParam("p") Optional<Integer> p, @RequestParam("field") Optional<String> field,
 			@RequestParam("keywords") Optional<String> kw) {
+		loadNameAcount( model);
 		// search
 		String kwords = "";
 		if (kw.isPresent()) {
@@ -211,5 +216,96 @@ public class ProductController {
 
 		return "/client/shop";
 	}
+	
+	//find by price
+	@RequestMapping("/product/search/price1")
+	public String findByPrice1(Model model, @RequestParam("p") Optional<Integer> p,
+			 @RequestParam("field") Optional<String> field) {
+		
+		loadNameAcount( model);
+		// field category
+		List<Category> listCategories = categoryService.findAll();
+		model.addAttribute("itemCate", listCategories);
+
+		// find by price
+		Pageable pageable = PageRequest.of(p.orElse(0), 6, Sort.by(Direction.DESC, field.orElse("price")));
+		
+		Page<Product> page = productDAO.findByPriceBetween(0,20, pageable);
+		
+		model.addAttribute("field", field.orElse("price").toUpperCase());
+		model.addAttribute("page", page);
+
+		return "/client/shop";
+	}
+	@RequestMapping("/product/search/price2")
+	public String findByPrice2(Model model, @RequestParam("p") Optional<Integer> p,
+			 @RequestParam("field") Optional<String> field) {
+		loadNameAcount( model);
+
+		// field category
+		List<Category> listCategories = categoryService.findAll();
+		model.addAttribute("itemCate", listCategories);
+
+		// find by price
+		Pageable pageable = PageRequest.of(p.orElse(0), 6, Sort.by(Direction.DESC, field.orElse("price")));
+		
+		Page<Product> page = productDAO.findByPriceBetween(21,50, pageable);
+		
+		model.addAttribute("field", field.orElse("price").toUpperCase());
+		model.addAttribute("page", page);
+
+		return "/client/shop";
+	}
+	@RequestMapping("/product/search/price3")
+	public String findByPrice3(Model model, @RequestParam("p") Optional<Integer> p,
+			 @RequestParam("field") Optional<String> field) {
+		
+		loadNameAcount( model);
+		// field category
+		List<Category> listCategories = categoryService.findAll();
+		model.addAttribute("itemCate", listCategories);
+
+		// find by price
+		Pageable pageable = PageRequest.of(p.orElse(0), 6, Sort.by(Direction.DESC, field.orElse("price")));
+		
+		Page<Product> page = productDAO.findByPriceBetween(51,100, pageable);
+		
+		model.addAttribute("field", field.orElse("price").toUpperCase());
+		model.addAttribute("page", page);
+
+		return "/client/shop";
+	}
+	@RequestMapping("/product/search/price4")
+	public String findByPrice4(Model model, @RequestParam("p") Optional<Integer> p,
+			 @RequestParam("field") Optional<String> field) {
+		loadNameAcount( model);
+
+		// field category
+		List<Category> listCategories = categoryService.findAll();
+		model.addAttribute("itemCate", listCategories);
+
+		// find by price
+		Pageable pageable = PageRequest.of(p.orElse(0), 6, Sort.by(Direction.DESC, field.orElse("price")));
+		
+		Page<Product> page = productDAO.findByPriceBetween(101,500, pageable);
+		
+		model.addAttribute("field", field.orElse("price").toUpperCase());
+		model.addAttribute("page", page);
+
+		return "/client/shop";
+	}
+	public void loadNameAcount(Model model) {
+		try {
+			// Đọc giá trị của attribute trong session
+			String name = findUserService.findUser(session.get("user"));
+			model.addAttribute("name", name);
+		} catch (Exception e) {
+			System.out.println(e + "loi kho load acount");
+		}
+	}
+	
+	
+	
+	
 
 }

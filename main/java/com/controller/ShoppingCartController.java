@@ -44,6 +44,7 @@ public class ShoppingCartController {
 	CartItemDAO cartItemDAO;
 	@Autowired
 	FindUserService findUserService;
+	
 
 	@RequestMapping("/client/shoppingcart/index")
 	public String viewCarts(Model model) {

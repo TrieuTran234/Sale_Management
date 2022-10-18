@@ -23,6 +23,9 @@ public interface ProductDAO extends PagingAndSortingRepository<Product, Integer>
 	@Query("SELECT o FROM Product o WHERE o.name LIKE ?1")
 	Page<Product> findByKeywords(String keywords, Pageable pageable);
 	
+	//sử dụng DSL để viết phương thức truy vấn thay cho @Query(JPQL) (cach 2)
+	Page<Product> findByPriceBetween(double minPrice, double maxPrice, Pageable pageable);
+	
 	// tao report loại sản phẩm, số sảnb phẩm của loại, tổng tiền 
 	
 	@Query("SELECT new Report(o.category.id,o.category.name,sum(o.price), count(o)) "

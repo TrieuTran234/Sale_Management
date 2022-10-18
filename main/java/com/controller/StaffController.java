@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.dao.CartItemDAO;
 import com.dao.StaffDAO;
 import com.entitySQL.Staff;
+import com.service.FindUserService;
 import com.service.ParamService;
 import com.service.SessionService;
 import com.service.StaffService;
@@ -35,10 +37,15 @@ public class StaffController {
 	SessionService sessionService;
 	@Autowired
 	StaffDAO staffDAO;
+	@Autowired
+	SessionService session;
+	@Autowired
+	FindUserService findUserService;
 	String error = "";
 
 	@RequestMapping("/admin/staff/index")
 	public String staffedit(Model model) {
+		loadNameAcount(model);
 		Staff staff = new Staff();
 		model.addAttribute("item", staff);
 		List<Staff> listsStaffs = staffService.findAll();
@@ -52,6 +59,7 @@ public class StaffController {
 	public String index(Model model, @RequestParam("p") Optional<Integer> p,
 			@RequestParam("keywords") Optional<String> kw, @RequestParam("field") Optional<String> field) {
 		// search
+		loadNameAcount(model);
 		String kwords = "";
 		if (kw.isPresent()) {
 			kwords = kw.orElse(sessionService.get("keyword"));
@@ -73,6 +81,7 @@ public class StaffController {
 
 	@RequestMapping("/admin/staff/edit/{id}")
 	public String edit(Model model, @PathVariable("id") String id) {
+		loadNameAcount(model);
 		Staff item = staffService.findById(id).get();
 		model.addAttribute("item", item);
 		List<Staff> items = staffService.findAll();
@@ -100,6 +109,7 @@ public class StaffController {
 	@RequestMapping("/admin/staff/update")
 	public String update(Staff item, Model model, @RequestParam("photo") MultipartFile multipartFile,
 			@RequestParam("image1") String image1) {
+		loadNameAcount(model);
 
 		if (!staffService.existsById(item.getId())) {
 
@@ -129,4 +139,13 @@ public class StaffController {
 		return "redirect:/admin/staff/list";
 	}
 
+	public void loadNameAcount(Model model) {
+		try {
+			// Đọc giá trị của attribute trong session
+			String name = findUserService.findUser(session.get("user"));
+			model.addAttribute("name", name);
+		} catch (Exception e) {
+			System.out.println(e + "loi kho load acount");
+		}
+	}
 }

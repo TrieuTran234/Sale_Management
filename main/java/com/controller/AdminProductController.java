@@ -50,7 +50,7 @@ public class AdminProductController {
 	String error = "";
 
 	@RequestMapping("/admin/product/index")
-	public String index(Model model) {
+	public String getAdminProductIndex(Model model) {
 		
 		Product product = new Product();
 		model.addAttribute("item", product);
@@ -68,7 +68,7 @@ public class AdminProductController {
 	}
 
 	@RequestMapping("/admin/product/list")
-	public String list(Model model, @RequestParam("p") Optional<Integer> p,
+	public String getAdminProductList(Model model, @RequestParam("p") Optional<Integer> p,
 			@RequestParam("keywords") Optional<String> kw, @RequestParam("field") Optional<String> field) {
 		
 		loadNameAcount(model);
@@ -105,6 +105,7 @@ public class AdminProductController {
 
 	@RequestMapping("/admin/product/create")
 	public String staffcreate(Product product, @RequestParam("photo") MultipartFile multipartFile) {
+		
 		if (!productService.existsById(product.getId())) {
 
 			// upload hinh
@@ -124,7 +125,7 @@ public class AdminProductController {
 	@RequestMapping("/admin/product/update")
 	public String update(Product item, Model model, @RequestParam("photo") MultipartFile multipartFile,
 			@RequestParam("image1") String image1) {
-
+		loadNameAcount(model);
 		if (!productService.existsById(item.getId())) {
 
 			error = "Id to update is not in the list";

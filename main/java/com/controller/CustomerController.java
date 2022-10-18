@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.dao.CustomerDAO;
 import com.entitySQL.Customer;
 import com.service.CustomerService;
+import com.service.FindUserService;
 import com.service.ParamService;
 import com.service.SessionService;
 
@@ -29,9 +30,14 @@ public class CustomerController {
 	SessionService sessionService;
 	@Autowired
 	CustomerDAO customerDAO;
+	@Autowired
+	FindUserService findUserService;
+	@Autowired
+	SessionService session;
 	
 	@RequestMapping("/admin/customer/index")
 	public String customerindex(Model model) {
+		loadNameAcount( model);
 		Customer customer = new Customer();
 		model.addAttribute("item", customer);
 		
@@ -45,6 +51,7 @@ public class CustomerController {
 
 	@RequestMapping("/admin/customer/list")
 	public String list(Model model) {
+		loadNameAcount( model);
 		Customer customer = new Customer();
 		model.addAttribute("item", customer);
 		List<Customer> listCustomers=customerService.findAll();
@@ -55,6 +62,7 @@ public class CustomerController {
 
 	@RequestMapping("/admin/customer/edit/{id}")
 	public String edit(Model model, @PathVariable("id") String id) {
+		loadNameAcount( model);
 		Customer item = customerService.findById(id).get();
 		model.addAttribute("item", item);
 		List<Customer> items = customerService.findAll();
@@ -83,7 +91,7 @@ public class CustomerController {
 	@RequestMapping("/admin/customer/update")
 	public String update(Customer item, Model model, @RequestParam("photo") MultipartFile multipartFile,
 			@RequestParam("image1") String image1) {
-
+		 loadNameAcount( model);
 		if (!customerService.existsById(item.getId())) {
 
 			error = "Id to update is not in the list";
@@ -110,5 +118,14 @@ public class CustomerController {
 	public String delete(@PathVariable("id") String id) {
 		customerService.deleteById(id);
 		return "redirect:/admin/customer/list";
+	}
+	public void loadNameAcount(Model model) {
+		try {
+			// Đọc giá trị của attribute trong session
+			String name = findUserService.findUser(session.get("user"));
+			model.addAttribute("name", name);
+		} catch (Exception e) {
+			System.out.println(e+"loi kho load acount");
+		}
 	}
 }
